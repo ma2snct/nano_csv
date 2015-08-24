@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 //追加モジュール
-var csv = require('csv');
+//var csv = require('csv');
 var nano = require('nano');
 
 
