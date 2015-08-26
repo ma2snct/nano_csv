@@ -68,5 +68,6 @@ app.get('/', function(req, res){
 	res.send('hello world');
 });
 app.listen(3000);
+console.log('the server starts at 3000');
 
 module.exports = app;
