@@ -15,10 +15,14 @@ router.get('/', function(req, res, next) {
 	//DBに書き込む内容をためこむやーつ
 	var rows = [];
 
-	db.get('Aug24th-3', function(err, body){
+	db.get('Aug24th-2', function(err, body){
 		if(!err){
 			//console.log(body);
-			console.log(body._rev);
+			var i=0;
+			body.data_txt.forEach(function(){
+				console.log(body.data_txt[i]);
+				i+=1;
+			});
 		}else{
 			console.log('it has err');
 			console.log(err);

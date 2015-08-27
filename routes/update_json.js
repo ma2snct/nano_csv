@@ -20,8 +20,12 @@ router.get('/', function(req, res, next) {
 				rows.push(body.data_txt[i]);
 				i = i + 1;
 			});
-			fs.readFile('./public/data.txt', 'utf-8', function(err, text){
-				rows.push(text);
+			var obj;
+			fs.readFile('./public/data.json', 'utf-8', function(err, text){
+				obj = JSON.parse(text);
+				//console.log(err);
+				//console.log(text);
+				rows.push(obj);
 				sotsu.insert({_id:body._id, _rev:body._rev, data_txt:rows}, function(err, body, header){
 					if(!err){
 						console.log('text update done');
