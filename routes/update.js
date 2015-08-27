@@ -13,11 +13,15 @@ var rows = [];
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-
 	db.get('Aug24th-2', function(err, body){
+		var i=0;
+		body.data_txt.forEach(function(){
+			rows.push(body.data_txt[i]);
+			i = i + 1;
+		});
 		if(!err){
 			csv()
-				.from.stream(fs.createReadStream(__dirname + '/../public/data.txt'))
+				.from.stream(fs.createReadStream(__dirname + '/../public/data.csv'))
 				//.to.path(__dirname + '/../public/out.csv')
 
 				//行数だけループするっぽい
@@ -27,7 +31,7 @@ router.get('/', function(req, res, next) {
 				.on('end', function(count){
 					console.log('text input is done');
 					
-					sotsu.insert({_id:'Aug24th-2', _rev:body._rev, data_txt:rows}, function(err, body, header){
+					sotsu.insert({_id:body._id, _rev:body._rev, data_txt:rows}, function(err, body, header){
 						if(err){
 							console.log('[sotsu.insert]', err.message);
 							return;
@@ -43,6 +47,7 @@ router.get('/', function(req, res, next) {
 		}
 	});
 });
+
 
 
 
